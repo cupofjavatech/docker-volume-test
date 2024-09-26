@@ -1,0 +1,50 @@
+services:
+
+  volume-filepath-rw:
+    image: "cupofjava/volume-readwrite:v1"
+    container_name: volume-filepath-rw
+    ports:
+      - "8082:8081"
+    environment:
+      - game.file.path=/app/games
+      - game.file.name=games.txt
+    volumes:
+#      - "D:/docker-volume:/app/games:ro"
+      - "D:/docker-volume:/app/games:rw"
+
+  volume-readwrite:
+    image: "cupofjava/volume-readwrite:v1"
+    container_name: volume-readwrite
+    ports:
+      - "8081:8081"
+    environment:
+      - game.file.path=/app/games
+      - game.file.name=games.txt
+    volumes:
+      - games-volume:/app/games
+
+  volume-filepath-rw:
+    image: "cupofjava/volume-readwrite:v1"
+    container_name: volume-filepath-rw
+    ports:
+      - "8082:8081"
+    environment:
+      - game.file.path=/app/games
+      - game.file.name=games.txt
+    volumes:
+      - "D:/docker-volume:/app/games:rw"
+
+  volume-filepath-ro:
+    image: "cupofjava/volume-readwrite:v1"
+    container_name: volume-filepath-ro
+    ports:
+      - "8083:8081"
+    environment:
+      - game.file.path=/app/games
+      - game.file.name=games.txt
+    volumes:
+      - "D:/docker-volume:/app/games:ro"
+
+volumes:
+  games-volume:
+
